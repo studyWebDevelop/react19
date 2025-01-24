@@ -1,4 +1,15 @@
 import React, { useState } from "react";
+import { useFormStatus } from "react-dom";
+
+const SubmitButton = () => {
+  const { pending } = useFormStatus();
+
+  return (
+    <button type="button" disabled={pending}>
+      {pending ? "제출중..." : "제출"}
+    </button>
+  );
+};
 
 const PostForm = ({ addPost }) => {
   const formAction = async (formData) => {
@@ -12,7 +23,7 @@ const PostForm = ({ addPost }) => {
   return (
     <form action={formAction}>
       <input type="text" name="title" />
-      <button type="submit">제출</button>
+      <SubmitButton />
     </form>
   );
 };
